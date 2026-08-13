@@ -62,7 +62,7 @@ function render(rows) {
       const value = row[series.key];
       const x = center + (seriesIndex - 1) * barStep - barW / 2;
       const h = base - y(value);
-      const labelX = x + barW / 2 + [-7, 0, 7][seriesIndex];
+      const labelX = x + barW / 2;
       // Labels rotate around their midpoint. Keep their lower end safely above
       // the x-axis regardless of how short the corresponding bar is.
       const labelY = Math.min(y(value) - 5, base - 18);
