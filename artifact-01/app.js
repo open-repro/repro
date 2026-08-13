@@ -45,7 +45,7 @@ function render(rows) {
   ];
   let legendX = width / 2 - 142;
   SERIES.forEach((series) => {
-    svg.push(`<rect x="${legendX}" y="20" width="12" height="12" fill="${series.fill}" stroke="#252525" stroke-width=".55"/><text x="${legendX + 18}" y="30" class="legend-text">${series.key}</text>`);
+    svg.push(`<rect x="${legendX}" y="13" width="11" height="18" fill="${series.fill}" stroke="#252525" stroke-width=".55"/><text x="${legendX + 18}" y="30" class="legend-text">${series.key}</text>`);
     legendX += series.key === "Allatori" ? 107 : 116;
   });
   svg.push(`<rect x="${margin.left}" y="${margin.top}" width="${plotW}" height="${plotH}" class="plot-bg"/>`);
