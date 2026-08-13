@@ -24,16 +24,16 @@ function showTooltip(event, label, series, value) {
 function render(rows) {
   // These dimensions mirror the pgfplots figure in the paper: a shallow plotting
   // region, compact legend, narrow bars, and a scientific-notation y-axis.
-  const width = 1040, height = 365, margin = { top: 52, right: 25, bottom: 85, left: 88 };
+  const width = 1040, height = 335, margin = { top: 52, right: 25, bottom: 85, left: 88 };
   const plotW = width - margin.left - margin.right;
   const plotH = height - margin.top - margin.bottom;
   const ymax = 30000;
   const y = (value) => margin.top + plotH - (value / ymax) * plotH;
   const groupW = plotW / rows.length;
-  const barW = Math.min(15, groupW * .19);
-  // A small overlap prevents antialiasing from producing a white seam between
-  // adjacent bars; pgfplots draws these as a contiguous three-bar cluster.
-  const barStep = barW - 0.8;
+  const barW = Math.min(17, groupW * .21);
+  // Bars meet at their edges. This removes whitespace without painting one bar
+  // over another.
+  const barStep = barW;
   const base = margin.top + plotH;
   const svg = [
     `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Distribution of target mapping references per L0 focal method">`,

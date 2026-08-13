@@ -33,14 +33,14 @@ select { width: 100%; border: 1px solid #bfc7d0; border-radius: 7px; padding: 8p
 .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
 .plot-bg { fill: #fff; stroke: #272727; stroke-width: 1; }
 .grid { stroke: #ddd; stroke-width: .7; }
-.x-tick { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 8.7px; }
-.y-tick { fill: #202124; font-family: "Paper Serif", serif; font-size: 10.7px; }
-.axis-title { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 10.7px; font-weight: 400; }
-.scale-label { fill: #202124; font-family: "Paper Serif", serif; font-size: 10.7px; }
-.legend-text { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 10.7px; font-weight: 400; }
+.x-tick { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 16px; }
+.y-tick { fill: #202124; font-family: "Paper Serif", serif; font-size: 19px; }
+.axis-title { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 19px; font-weight: 400; }
+.scale-label { fill: #202124; font-family: "Paper Serif", serif; font-size: 19px; }
+.legend-text { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 19px; font-weight: 400; }
 .bar { stroke: #252525; stroke-width: .45; cursor: crosshair; }
 .bar:hover { stroke-width: 1.6; filter: brightness(.94); }
-.value { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 8.7px; font-weight: 400; }
+.value { fill: #202124; font-family: "Paper Sans", sans-serif; font-size: 16px; font-weight: 400; }
 .tooltip { position: fixed; z-index: 4; max-width: 240px; padding: 8px 10px; border-radius: 6px; color: white; background: #242424; box-shadow: 0 5px 18px rgba(0,0,0,.18); font-size: .8rem; line-height: 1.4; pointer-events: none; }
 .details { margin-top: 16px; border: 1px solid #d9dde3; border-radius: 8px; background: white; padding: 12px 16px; }
 summary { cursor: pointer; font-size: .9rem; font-weight: 700; }
