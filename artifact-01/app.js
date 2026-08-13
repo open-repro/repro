@@ -62,7 +62,9 @@ function render(rows) {
       const value = row[series.key];
       const x = center + (seriesIndex - 1) * barStep - barW / 2;
       const h = base - y(value);
-      const labelX = x + barW / 2;
+      // SVG's rotated glyph metrics lean visually left of their coordinate;
+      // a small optical correction centers the annotation over the bar.
+      const labelX = x + barW / 2 + 2;
       // Labels rotate around their midpoint. Keep their lower end safely above
       // the x-axis regardless of how short the corresponding bar is.
       const labelY = Math.min(y(value) - 5, base - 18);
