@@ -31,7 +31,9 @@ function render(rows) {
   const y = (value) => margin.top + plotH - (value / ymax) * plotH;
   const groupW = plotW / rows.length;
   const barW = Math.min(15, groupW * .19);
-  const barGap = 2;
+  // A small overlap prevents antialiasing from producing a white seam between
+  // adjacent bars; pgfplots draws these as a contiguous three-bar cluster.
+  const barStep = barW - 0.8;
   const base = margin.top + plotH;
   const svg = [
     `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Distribution of target mapping references per L0 focal method">`,
@@ -50,7 +52,7 @@ function render(rows) {
   for (let tick = 0; tick <= ymax; tick += 5000) {
     svg.push(`<line x1="${margin.left}" y1="${y(tick)}" x2="${margin.left + plotW}" y2="${y(tick)}" class="grid"/>`);
     const tickLabel = tick === 0 ? "0" : `${tick / 10000}`;
-    svg.push(`<text x="${margin.left - 9}" y="${y(tick) + 3.5}" text-anchor="end" class="axis-text">${tickLabel}</text>`);
+    svg.push(`<text x="${margin.left - 9}" y="${y(tick) + 3.5}" text-anchor="end" class="y-tick">${tickLabel}</text>`);
   }
   svg.push(`<text x="${margin.left - 28}" y="${margin.top - 17}" class="scale-label">·10<tspan baseline-shift="super" font-size="7">4</tspan></text>`);
   svg.push(`<text x="24" y="${margin.top + plotH / 2}" text-anchor="middle" transform="rotate(-90 24 ${margin.top + plotH / 2})" class="axis-title">Number of focal methods</text>`);
@@ -58,13 +60,13 @@ function render(rows) {
     const center = margin.left + groupW * (index + .5);
     SERIES.forEach((series, seriesIndex) => {
       const value = row[series.key];
-      const x = center + (seriesIndex - 1) * (barW + barGap) - barW / 2;
+      const x = center + (seriesIndex - 1) * barStep - barW / 2;
       const h = base - y(value);
       const labelX = x + barW / 2 + [-7, 0, 7][seriesIndex];
       const label = value < 1000 ? `<text x="${labelX}" y="${y(value) - 3}" text-anchor="middle" transform="rotate(-90 ${labelX} ${y(value) - 3})" class="value">${value}</text>` : "";
       svg.push(`<rect class="bar" data-label="${row.target_count}" data-series="${series.key}" data-value="${value}" x="${x}" y="${y(value)}" width="${barW}" height="${h}" fill="${series.fill}"/>${label}`);
     });
-    svg.push(`<text x="${center + 4}" y="${base + 17}" text-anchor="end" transform="rotate(-45 ${center + 4} ${base + 17})" class="axis-text">${row.target_count}</text>`);
+    svg.push(`<text x="${center + 4}" y="${base + 17}" text-anchor="end" transform="rotate(-45 ${center + 4} ${base + 17})" class="x-tick">${row.target_count}</text>`);
   });
   svg.push(`<text x="${margin.left + plotW / 2}" y="${height - 13}" text-anchor="middle" class="axis-title">Number of targets per focal method</text></svg>`);
   chart.innerHTML = svg.join("");
