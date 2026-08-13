@@ -54,7 +54,7 @@ function render(rows) {
     const tickLabel = tick === 0 ? "0" : `${tick / 10000}`;
     svg.push(`<text x="${margin.left - 9}" y="${y(tick) + 3.5}" text-anchor="end" class="y-tick">${tickLabel}</text>`);
   }
-  svg.push(`<text x="${margin.left - 28}" y="${margin.top - 17}" class="scale-label">·10<tspan baseline-shift="super" font-size="7">4</tspan></text>`);
+  svg.push(`<text x="${margin.left - 28}" y="${margin.top - 17}" class="scale-label">×10⁴</text>`);
   svg.push(`<text x="24" y="${margin.top + plotH / 2}" text-anchor="middle" transform="rotate(-90 24 ${margin.top + plotH / 2})" class="axis-title">Number of focal methods</text>`);
   rows.forEach((row, index) => {
     const center = margin.left + groupW * (index + .5);
@@ -63,7 +63,10 @@ function render(rows) {
       const x = center + (seriesIndex - 1) * barStep - barW / 2;
       const h = base - y(value);
       const labelX = x + barW / 2 + [-7, 0, 7][seriesIndex];
-      const label = value < 1000 ? `<text x="${labelX}" y="${y(value) - 3}" text-anchor="middle" transform="rotate(-90 ${labelX} ${y(value) - 3})" class="value">${value}</text>` : "";
+      // Labels rotate around their midpoint. Keep their lower end safely above
+      // the x-axis regardless of how short the corresponding bar is.
+      const labelY = Math.min(y(value) - 5, base - 18);
+      const label = value < 1000 ? `<text x="${labelX}" y="${labelY}" text-anchor="middle" transform="rotate(-90 ${labelX} ${labelY})" class="value">${value}</text>` : "";
       svg.push(`<rect class="bar" data-label="${row.target_count}" data-series="${series.key}" data-value="${value}" x="${x}" y="${y(value)}" width="${barW}" height="${h}" fill="${series.fill}"/>${label}`);
     });
     svg.push(`<text x="${center + 4}" y="${base + 17}" text-anchor="end" transform="rotate(-45 ${center + 4} ${base + 17})" class="x-tick">${row.target_count}</text>`);
