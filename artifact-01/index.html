@@ -3,14 +3,49 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Artifact 01 · Open Repro</title>
-    <link rel="stylesheet" href="../style.css" />
+    <title>Artifact 01 · Figures</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main>
-      <p class="eyebrow">Open Repro · Artifact 01</p>
-      <h1>Reproducibility artifact.</h1>
-      <p class="lede">Interactive figures and supporting materials will be published here.</p>
+    <main class="page-shell">
+      <header class="site-header">
+        <div>
+          <p class="eyebrow">Artifact 01</p>
+          <h1>Interactive figures</h1>
+        </div>
+        <nav aria-label="Figure navigation">
+          <label for="figure-menu">Figure</label>
+          <select id="figure-menu">
+            <option value="target-count-histogram" selected>Target mapping references</option>
+          </select>
+        </nav>
+      </header>
+
+      <section class="figure-intro">
+        <p class="kicker">Dataset analysis · L0</p>
+        <h2>Distribution of target mapping references per L0 focal method</h2>
+        <p>
+          The chart reproduces the paper figure. Hover over a bar to inspect its
+          count; the menu will list additional interactive figures as they are added.
+        </p>
+      </section>
+
+      <section class="chart-card" aria-label="Interactive grouped bar chart">
+        <div id="chart" class="chart" aria-live="polite"></div>
+        <div id="tooltip" class="tooltip" role="status" hidden></div>
+      </section>
+
+      <section class="details">
+        <details>
+          <summary>Data and figure notes</summary>
+          <p>
+            Each group shows focal methods with the stated number of target mappings.
+            Allatori, ProGuard, and yGuard use the same values as the static paper figure.
+          </p>
+          <a href="data/target-count-histogram.csv">Download data (CSV)</a>
+        </details>
+      </section>
     </main>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
