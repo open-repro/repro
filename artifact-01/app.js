@@ -45,7 +45,7 @@ function render(rows) {
   ];
   let legendX = width / 2 - 142;
   SERIES.forEach((series) => {
-    svg.push(`<rect x="${legendX}" y="13" width="11" height="18" fill="${series.fill}" stroke="#252525" stroke-width=".55"/><text x="${legendX + 18}" y="30" class="legend-text">${series.key}</text>`);
+    svg.push(`<rect x="${legendX}" y="10" width="8" height="22" fill="${series.fill}" stroke="#252525" stroke-width=".55"/><text x="${legendX + 15}" y="30" class="legend-text">${series.key}</text>`);
     legendX += series.key === "Allatori" ? 107 : 116;
   });
   svg.push(`<rect x="${margin.left}" y="${margin.top}" width="${plotW}" height="${plotH}" class="plot-bg"/>`);
@@ -64,7 +64,7 @@ function render(rows) {
       const h = base - y(value);
       // SVG's rotated glyph metrics lean visually left of their coordinate;
       // a small optical correction centers the annotation over the bar.
-      const labelX = x + barW / 2 + 2;
+      const labelX = x + barW / 2 + 6;
       // Labels rotate around their midpoint. Keep their lower end safely above
       // the x-axis regardless of how short the corresponding bar is.
       const labelY = Math.min(y(value) - 5, base - 18);
